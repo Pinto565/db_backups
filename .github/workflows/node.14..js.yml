@@ -25,6 +25,10 @@ jobs:
       run : |
         node -v
         npm -v
+    - run : pwd && ls #Checking Files before backup
     - name : Installing Packages
       run : |
         npm install
+    - name : Starting the Node File
+      run : node index
+    - run : pwd && ls #Checking Files After Backup
