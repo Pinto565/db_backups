@@ -5,36 +5,35 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
-
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: 14
-    - name : Checking node and npm version
-      run : |
-        node -v
-        npm -v
-    - run : pwd && ls #Checking Files before backup
-    - name : Installing Packages
-      run : |
-        npm install
-    - name : Starting the Node File
-      run : node index
-      env : 
-        DB_HOST : ${{secrets.DB_HOST}}
-        DB_USER : ${{secrets.DB_USER}}
-        DB_PASSWORD : ${{secrets.DB_PASSWORD}}
-        DB_PORT : ${{secrets.DB_PORT}}
-        BACKUP_DB : ${{secrets.BACKUP_DB}}
-    - run : pwd && ls #Checking Files After Backup
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - name: Checking node and npm version
+        run: |
+          node -v
+          npm -v
+      - run: pwd && ls #Checking Files before backup
+      - name: Installing Packages
+        run: |
+          npm install
+      - name: Starting the Node File
+        run: node index
+        env:
+          DB_HOST: ${{secrets.DB_HOST}}
+          DB_USER: ${{secrets.DB_USER}}
+          DB_PASSWORD: ${{secrets.DB_PASSWORD}}
+          DB_PORT: ${{secrets.DB_PORT}}
+          DB_NAME: ${{secrets.DB_NAME}}
+          ALL_DB: ${{secrets.ALL_DATABASE}}
+      - run: pwd && ls #Checking Files After Backup
