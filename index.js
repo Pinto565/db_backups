@@ -23,7 +23,7 @@ const takeBackup = () => {
 
 
   const db_backup = shell.exec(
-    `mysqldump --single-transaction -h${DB_HOST} -P${DB_PORT} -u${DB_USER} -p${DB_PASSWORD} ${DB_NAME} > ${filename}.sql`,
+    `mysqldump --single-transaction -h${DB_HOST} -P${DB_PORT} -u${DB_USER} -p${DB_PASSWORD} ${DB_NAME} > db_backup/${filename}.sql`,
     { silent: true }
   );
   if (db_backup.code == 0) {
