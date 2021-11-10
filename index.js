@@ -26,7 +26,7 @@ const takeBackup = () => {
     `mysqldump --single-transaction -h${DB_HOST} -P${DB_PORT} -u${DB_USER} -p${DB_PASSWORD} ${DB_NAME} > ${filename}.sql`,
     { silent: true }
   );
-  if (db_backup.code === 0) {
+  if (db_backup.code == 0) {
     console.log("Database backup successfully taken");
   } else {
     console.log("Error taking database backup");
