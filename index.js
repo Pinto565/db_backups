@@ -21,9 +21,6 @@ const takeBackup = () => {
     DB_PORT = "3306";
   }
 
-  // console.log(
-  //   `mysqldump --single-transaction -h${DB_HOST} -P${DB_PORT} -u${DB_USER} -p${DB_PASSWORD} ${DB_NAME} > ${filename}.sql`
-  // );
 
   const db_backup = shell.exec(
     `mysqldump --single-transaction -h${DB_HOST} -P${DB_PORT} -u${DB_USER} -p${DB_PASSWORD} ${DB_NAME} > ${filename}.sql`,
