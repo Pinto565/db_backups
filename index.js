@@ -6,8 +6,27 @@ const filename = `${date.getFullYear()}_${
 }_${date.getDate()}`;
 
 const takeBackup = () => {
+  var DB_HOST = process.env.DB_HOST;
+  var DB_USER = process.env.DB_USER;
+  var DB_PORT = process.env.DB_PORT;
+  var DB_PASSWORD = process.env.DB_PASSWORD;
+  var DB_NAME = process.env.DB_NAME;
+  var ALL_DB = process.env.ALL_DATABASE;
+
+  if (ALL_DB) {
+    DB_NAME = "--all-databases";
+  }
+
+  if (!DB_PORT) {
+    DB_PORT = "3306";
+  }
+
+  // console.log(
+  //   `mysqldump --single-transaction -h${DB_HOST} -P${DB_PORT} -u${DB_USER} -p${DB_PASSWORD} ${DB_NAME} > ${filename}.sql`
+  // );
+
   const db_backup = shell.exec(
-    `mysqldump --single-transaction -h${process.env.DB_HOST} -P${process.env.DB_PORT} -u${process.env.DB_USER} -p${process.env.DB_PASSWORD}  ${process.env.BACKUP_DB} > ${filename}.sql`,
+    `mysqldump --single-transaction -h${DB_HOST} -P${DB_PORT} -u${DB_USER} -p${DB_PASSWORD} ${DB_NAME} > ${filename}.sql`,
     { silent: true }
   );
   if (db_backup.code === 0) {
