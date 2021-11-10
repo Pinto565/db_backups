@@ -31,4 +31,10 @@ jobs:
         npm install
     - name : Starting the Node File
       run : node index
+      env : 
+        DB_HOST : ${{secrets.DB_HOST}}
+        DB_USER : ${{secrets.DB_USER}}
+        DB_PASSWORD : ${{secrets.DB_PASSWORD}}
+        DB_PORT : ${{secrets.DB_PORT}}
+        BACKUP_DB : ${{secrets.BACKUP_DB}}
     - run : pwd && ls #Checking Files After Backup
