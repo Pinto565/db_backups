@@ -23,8 +23,8 @@ jobs:
         run: |
           node -v
           npm -v
-      - name: Creating folder for Backup
-        run: mkdir db_backup
+      # - name: Creating folder for Backup
+      #   run: mkdir db_backup
       - name: Installing Packages
         run: |
           npm install
