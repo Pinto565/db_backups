@@ -36,6 +36,10 @@ const takeBackup = () => {
 const sendToDiscord = () => {
   var WEBHOOK_URL = process.env.WEBHOOK_URL;
   const hook = new Webhook(WEBHOOK_URL);
+  hook.setUsername("Mysql Dumps");
+  hook.setAvatar(
+    "https://cdn.app.compendium.com/uploads/user/e7c690e8-6ff9-102a-ac6d-e4aebca50425/ee090372-8a63-44d7-b163-306184b9d293/File/cde43891991f76a5e7df17ac6d373aff/mysql_logo_png_transparent.png"
+  );
   hook.sendFile(`db_backup/${filename}.sql`);
 };
 
