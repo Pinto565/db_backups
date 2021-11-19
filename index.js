@@ -1,5 +1,6 @@
 const shell = require("shelljs");
 const dotenv = require("dotenv").config();
+const { Webhook } = require("discord-webhook-node");
 const date = new Date();
 const filename = `${date.getFullYear()}_${
   date.getMonth() + 1
@@ -21,7 +22,6 @@ const takeBackup = () => {
     DB_PORT = "3306";
   }
 
-
   const db_backup = shell.exec(
     `mysqldump --single-transaction -h${DB_HOST} -P${DB_PORT} -u${DB_USER} -p${DB_PASSWORD} ${DB_NAME} > db_backup/${filename}.sql`,
     { silent: true }
@@ -33,4 +33,15 @@ const takeBackup = () => {
   }
 };
 
-takeBackup();
+const sendToDiscord = () => {
+  var WEBHOOK_URL = process.env.WEBHOOK_URL;
+  const hook = new Webhook(WEBHOOK_URL);
+  hook.sendFile(`db_backup/${filename}.sql`);
+};
+
+const runFile = async () => {
+  await takeBackup();
+  await sendToDiscord();
+};
+
+runFile();

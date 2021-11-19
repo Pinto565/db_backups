@@ -23,8 +23,8 @@ jobs:
         run: |
           node -v
           npm -v
-      - name : Creating folder for Backup
-        run : mkdir db_backup
+      - name: Creating folder for Backup
+        run: mkdir db_backup
       - name: Installing Packages
         run: |
           npm install
@@ -37,8 +37,9 @@ jobs:
           DB_PORT: ${{secrets.DB_PORT}}
           DB_NAME: ${{secrets.DB_NAME}}
           ALL_DB: ${{secrets.ALL_DATABASE}}
-      - name : Commiting to the Repo
-        run : |
+          WEBHOOK_URL: ${{secrets.WEBHOOK_URL}}
+      - name: Commiting to the Repo
+        run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
